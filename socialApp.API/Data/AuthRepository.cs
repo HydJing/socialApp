@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using socialApp.API.Models;
 
 namespace socialApp.API.Data
@@ -11,9 +12,37 @@ namespace socialApp.API.Data
         {
             _context = context;
         }
-        public async Task<User> login(string username, string password)
+        public async Task<User> Login(string username, string password)
         {
-            throw new System.NotImplementedException();
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
+
+            if (user == null) {
+                return null;
+            }
+
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt)) {
+                return null;
+            }
+        }
+
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using(var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt)) {
+                
+                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+
+                // computedHash.SequenceEqual(passwordHash); 
+                
+                for (int i = 0; i < computedHash.Length; i++)
+                {
+                    if (computedHash[i] != passwordHash[i]) 
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         public async Task<User> Register(User user, string password)
@@ -41,7 +70,7 @@ namespace socialApp.API.Data
 
         public async Task<bool> userExists(string username)
         {
-            throw new System.NotImplementedException();
+            return await _context.Users.AnyAsync(x => x.Username == username);
         }
     }
 }

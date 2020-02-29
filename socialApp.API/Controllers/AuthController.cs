@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using socialApp.API.Data;
+using socialApp.API.Dtos;
 using socialApp.API.Models;
 
 namespace socialApp.API.Controllers
@@ -19,21 +20,21 @@ namespace socialApp.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(string username, string password)
+        public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
         {
-            username = username.ToLower();
+            userRegisterDto.Username = userRegisterDto.Username.ToLower();
 
-            if (await _repo.userExists(username))
+            if (await _repo.userExists(userRegisterDto.Username))
             {
                 return BadRequest("Username already taken");
             }
 
             var userToCreate = new User
             {
-                Username = username
-            }
+                Username = userRegisterDto.Username
+            };
 
-            var createdUser = await _repo.Register(userToCreate, password);
+            var createdUser = await _repo.Register(userToCreate, userRegisterDto.Password);
 
             return StatusCode(201);
         }

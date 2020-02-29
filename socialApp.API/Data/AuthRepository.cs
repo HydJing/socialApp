@@ -23,6 +23,8 @@ namespace socialApp.API.Data
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt)) {
                 return null;
             }
+            
+            return user;
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)

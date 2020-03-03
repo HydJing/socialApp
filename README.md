@@ -17,7 +17,7 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 > Postman
 
 
-# Summary Module 1
+# Summary Section 1
 - Introducing the projects and tech stack
 
 
@@ -31,3 +31,12 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - Make HTTP requests from Angular to fetch data from our API
 - Bind data from the API to the HTML to display it on the page
 - Add support for Bootstrap and Font-Awesome
+
+# Summary Section 3
+- How we store passwords in the DB(no password, only hash and hashed value)
+- Create User Model Entity
+- The Repository Pattern(extra layer between business logic and DB)
+- Creating the Authentication Controller
+- Data Transfer Objects(DTOs)
+- Token Authentication(JWT token)
+- Authentication Middleware

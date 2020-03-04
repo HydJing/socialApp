@@ -40,3 +40,9 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - Data Transfer Objects(DTOs)
 - Token Authentication(JWT token)
 - Authentication Middleware
+
+# Summary Section 4
+- Angular service(authentication service)
+- conditionally displaying the elements in the DOM(ngIf)
+- Input Properties([(ngModel)]="model.password")
+- Output Properties(EventEmitter)

@@ -50,6 +50,9 @@ namespace socialApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {
+
+            throw new Exception("exception here~");
+
             // check the DB do we have a customer that matchs the username and password
             var UserFromRepo = await _repo.Login(userLoginDto.Username, userLoginDto.Password);
 
@@ -85,7 +88,8 @@ namespace socialApp.API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return Ok(new {
+            return Ok(new 
+            {
                 token = tokenHandler.WriteToken(token)
             });
         }

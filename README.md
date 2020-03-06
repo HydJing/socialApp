@@ -46,3 +46,7 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - conditionally displaying the elements in the DOM(ngIf)
 - Input Properties([(ngModel)]="model.password")
 - Output Properties(EventEmitter)
+
+# Summary Section 5
+- Error handling in API(using .net core to handle erors)
+- Error handling on the client side(in Angular, should show the erro on website page)

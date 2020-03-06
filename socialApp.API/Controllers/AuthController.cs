@@ -51,8 +51,6 @@ namespace socialApp.API.Controllers
         public async Task<IActionResult> Login(UserLoginDto userLoginDto)
         {
 
-            throw new Exception("exception here~");
-
             // check the DB do we have a customer that matchs the username and password
             var UserFromRepo = await _repo.Login(userLoginDto.Username, userLoginDto.Password);
 

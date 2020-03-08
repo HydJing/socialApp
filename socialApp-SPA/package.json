@@ -23,6 +23,7 @@
     "@types/alertify": "^0.3.30",
     "alertifyjs": "^1.13.1",
     "bootstrap": "^4.4.1",
+    "bootswatch": "^4.4.1",
     "font-awesome": "^4.7.0",
     "ngx-bootstrap": "^5.5.0",
     "rxjs": "~6.5.4",

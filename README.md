@@ -50,3 +50,9 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 # Summary Section 5
 - Error handling in API(using .net core to handle erors)
 - Error handling on the client side(in Angular, should show the erro on website page)
+
+# Summary Section 6
+- Alertifyjs(pop up message, api response)
+- Angular JWT(handle decoding and checking token exists, no security improvement)
+- ngx-bootstrap(replacement for JQuery)
+- bootswatch(theme)

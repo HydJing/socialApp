@@ -56,3 +56,10 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - Angular JWT(handle decoding and checking token exists, no security improvement)
 - ngx-bootstrap(replacement for JQuery)
 - bootswatch(theme)
+
+# Summary Section 7
+- Setup the route
+- using RouterLinkActive(show active style when matched the route)
+- Using Routing in code
+- protecting the Routes
+- proteching multiple routes at once(grouped ruotes)

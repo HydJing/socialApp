@@ -63,3 +63,11 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - Using Routing in code
 - protecting the Routes
 - proteching multiple routes at once(grouped ruotes)
+
+# Summary Section 8
+- Extending the User class(more DTOs, e.g. UserForListDto, PhotoForDetailedDto)
+- more migrations
+- Cascade Delete(delete user also delete photo record. Model User.cs)
+- seeding more data into our DB(Seed.cs)
+- create a new repository for whole app(SocialRepository)
+ - Using Automapper(mapping the enity automatically. AutoMapperProfiles)

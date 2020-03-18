@@ -62,3 +62,8 @@
     background-color: #303030 !important;
 
   }
+
+  .ngx-gallery { 
+    display: inline-block; 
+    margin-bottom: 20px; 
+  }

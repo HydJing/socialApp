@@ -71,3 +71,11 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - seeding more data into our DB(Seed.cs)
 - create a new repository for whole app(SocialRepository)
  - Using Automapper(mapping the enity automatically. AutoMapperProfiles)
+
+ # Summary Section 9
+- Using types in Typescript
+- Retrieving Users from the API(user service)
+- Using Bootstrap to create member card(calss card from Bootstrap)
+- Adding a Detailed view of the users(page for detail information of user)
+- Route resolvers(add data with route)
+- Adding a Photo gallery(ngx-gallery)

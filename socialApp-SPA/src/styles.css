@@ -67,3 +67,7 @@
     display: inline-block; 
     margin-bottom: 20px; 
   }
+
+  button:hover:disabled {
+    cursor: auto !important;
+  }

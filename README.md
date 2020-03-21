@@ -79,3 +79,10 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - Adding a Detailed view of the users(page for detail information of user)
 - Route resolvers(add data with route)
 - Adding a Photo gallery(ngx-gallery)
+
+ # Summary Section 10
+- Created a component for editing profile(member-edit component)
+- CanDeactiveate Route guard(check unsaved changes before navigate away)
+- The @HostListener decorator (used for CanDeactiveate route)
+- The @ViewChild decorator (used for access the form in our component typescript file)
+- Persisted changes to the API (update the user with member edit page)

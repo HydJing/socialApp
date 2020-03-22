@@ -40,6 +40,9 @@ namespace socialApp.API
             });
             services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
+
+            services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
+
             services.AddAutoMapper(typeof(SocialRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<ISocialRepository, SocialRepository>();

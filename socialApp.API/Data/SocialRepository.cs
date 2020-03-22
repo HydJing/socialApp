@@ -22,6 +22,13 @@ namespace socialApp.API.Data
             _context.Remove(entity);
         }
 
+        public Task<Photo> GetPhoto(int id)
+        {
+            var photo = _context.Photos.FirstOrDefaultAsync(p => p.Id == id);
+
+            return photo;
+        }
+
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.Include(user => user.Photos).FirstOrDefaultAsync(u => u.Id == id);

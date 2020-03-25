@@ -55,7 +55,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
       MemberCardComponent,
       MemberDetailComponent,
       MemberEditComponent,
-      PhotoEditorComponent
+      PhotoEditorComponent,
    ],
    imports: [
       BrowserModule,
@@ -66,7 +66,6 @@ export class CustomHammerConfig extends HammerGestureConfig {
       BrowserAnimationsModule,
       RouterModule.forRoot(appRoutes),
       NgxGalleryModule,
-      FileUploadModule,
       JwtModule.forRoot({
          config: {
             tokenGetter: tokenGetter,
@@ -74,6 +73,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
             blacklistedRoutes: ['localhost:5000/api/auth']
          }
       }),
+      FileUploadModule,
    ],
    providers: [
       AuthService,

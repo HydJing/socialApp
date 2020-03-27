@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -20,8 +21,10 @@ namespace socialApp.API.Controllers
     {
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        private readonly IMapper _mapper;
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
         {
+            _mapper = mapper;
             _config = config;
             _repo = repo;
 
@@ -55,7 +58,8 @@ namespace socialApp.API.Controllers
             var UserFromRepo = await _repo.Login(userLoginDto.Username, userLoginDto.Password);
 
             // return login failed with no general information
-            if (UserFromRepo == null) {
+            if (UserFromRepo == null)
+            {
                 return Unauthorized();
             }
 
@@ -86,9 +90,12 @@ namespace socialApp.API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return Ok(new 
+            var user = _mapper.Map<UserForListDto>(UserFromRepo);
+
+            return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                token = tokenHandler.WriteToken(token),
+                user
             });
         }
 

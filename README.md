@@ -86,3 +86,11 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - The @HostListener decorator (used for CanDeactiveate route)
 - The @ViewChild decorator (used for access the form in our component typescript file)
 - Persisted changes to the API (update the user with member edit page)
+
+ # Summary Section 11
+- Where to store the photos(third party service, Cloudinary)
+- Added a photos controller(manage all the photo actions in API side)
+- NG2 file upload(using plugin to simplfy the upload file process)
+- Setting the photo as main(set the specific photos as main)
+- Using Filter and Splice(filter to get each item property, splice get item by index position)
+- Any to Any component communication(using BehaviorObject to subscribe the updates)

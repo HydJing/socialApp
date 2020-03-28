@@ -135,5 +135,58 @@ namespace socialApp.API.Controllers
             return BadRequest("Could not set photo to main");
 
         }
+
+        [HttpDelete("{photoId}")]
+    
+        public async Task<IActionResult> DeletePhoto(int userId, int photoId)
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var user = await _repo.GetUser(userId);
+
+            if (!user.Photos.Any(p => p.Id == photoId))
+            {
+                return Unauthorized();
+            }
+
+            var photoFromRepo = await _repo.GetPhoto(photoId);
+
+            if (photoFromRepo.IsMain)
+            {
+                return BadRequest("You cannot delete main photo");
+            }
+
+            // try delete the image if it has public id(exists in cloudinary)
+            if (photoFromRepo.PublicId != null)
+            {
+                var deleteParams = new DeletionParams(photoFromRepo.PublicId);
+                
+                var result = _cloudinary.Destroy(deleteParams);
+
+                if (result.Result == "ok") 
+                {
+                    _repo.Delete(photoFromRepo);
+                }
+            }
+
+            // does not exist in cloudinary, just remove the image records
+            if  (photoFromRepo.PublicId == null)
+            {
+                _repo.Delete(photoFromRepo);
+            }
+
+            // save all the changes in DB
+            if (await _repo.SaveAll()) 
+            {
+                return Ok();
+            }
+
+            // nothing removed then return bad request
+            return BadRequest("Failed to delete the photo");
+        }
+
     }
 }

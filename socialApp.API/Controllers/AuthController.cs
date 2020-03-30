@@ -31,23 +31,23 @@ namespace socialApp.API.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
+        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            userRegisterDto.Username = userRegisterDto.Username.ToLower();
+            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
-            if (await _repo.userExists(userRegisterDto.Username))
+            if (await _repo.userExists(userForRegisterDto.Username))
             {
                 return BadRequest("Username already taken");
             }
 
-            var userToCreate = new User
-            {
-                Username = userRegisterDto.Username
-            };
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
-            var createdUser = await _repo.Register(userToCreate, userRegisterDto.Password);
+            var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
-            return StatusCode(201);
+            var userToReturn = _mapper.Map<UserForDetailedDto>(createdUser);
+            
+            return CreatedAtRoute("GetUser", new { controller = "Users", 
+                id = createdUser.Id }, userToReturn);
         }
 
         [HttpPost("login")]
@@ -55,10 +55,10 @@ namespace socialApp.API.Controllers
         {
 
             // check the DB do we have a customer that matchs the username and password
-            var UserFromRepo = await _repo.Login(userLoginDto.Username, userLoginDto.Password);
+            var userFromRepo = await _repo.Login(userLoginDto.Username, userLoginDto.Password);
 
             // return login failed with no general information
-            if (UserFromRepo == null)
+            if (userFromRepo == null)
             {
                 return Unauthorized();
             }
@@ -67,8 +67,8 @@ namespace socialApp.API.Controllers
             // set up the claims data
             var claims = new[]
             {
-                new Claim(ClaimTypes.NameIdentifier, UserFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, UserFromRepo.Username),
+                new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
+                new Claim(ClaimTypes.Name, userFromRepo.Username),
             };
 
             // get token key from the pre-defined string in the app settings, it should be at least more than 12 random characters
@@ -90,7 +90,7 @@ namespace socialApp.API.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            var user = _mapper.Map<UserForListDto>(UserFromRepo);
+            var user = _mapper.Map<UserForListDto>(userFromRepo);
 
             return Ok(new
             {

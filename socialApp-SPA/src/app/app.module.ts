@@ -30,6 +30,7 @@ import { MemberEditResolver } from './_resolvers/member-edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { TimeagoModule } from 'ngx-timeago';
 
 
 
@@ -78,6 +79,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
       }),
       FileUploadModule,
       ReactiveFormsModule,
+      TimeagoModule.forRoot(),
    ],
    providers: [
       AuthService,

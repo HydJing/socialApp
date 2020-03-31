@@ -94,3 +94,11 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - Setting the photo as main(set the specific photos as main)
 - Using Filter and Splice(filter to get each item property, splice get item by index position)
 - Any to Any component communication(using BehaviorObject to subscribe the updates)
+
+ # Summary Section 12
+- Reactive Forms introduction(register form, angular core ReactiveFormsModule)
+- Validation(create form group as form builder with validations)
+- Custom Validator(check password with confirmPassword)
+- Validation Feedback(error message when validation failed)
+- The Date problem(use NGX BsDatepickerConfig for birth of date input)
+- Hooking it all up to the API(AuthController, UserController and register DTO)

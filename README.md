@@ -102,3 +102,6 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - Validation Feedback(error message when validation failed)
 - The Date problem(use NGX BsDatepickerConfig for birth of date input)
 - Hooking it all up to the API(AuthController, UserController and register DTO)
+
+ # Summary Section 13
+- Update User last active date time(using NGX-timeago module, using action filter to update last active date time of user when ever user controller been used)

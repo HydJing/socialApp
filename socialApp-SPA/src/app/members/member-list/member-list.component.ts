@@ -30,6 +30,7 @@ export class MemberListComponent implements OnInit {
     this.userParams.gender = (this.user.gender === 'female' ? 'male' : 'female');
     this.userParams.minAge = 18;
     this.userParams.maxAge = 99;
+    this.userParams.orderBy = 'lastActive';
   }
 
   pageChanged(event: any): void {
@@ -45,7 +46,11 @@ export class MemberListComponent implements OnInit {
   }
 
   loadUsers() {
-    this.userSerice.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams).subscribe((res: PaginationResult<User[]>) => {
+    this.userSerice.getUsers(
+      this.pagination.currentPage,
+      this.pagination.itemsPerPage,
+      this.userParams)
+      .subscribe((res: PaginationResult<User[]>) => {
       this.users = res.result;
       this.pagination = res.pagination;
     }, error => {

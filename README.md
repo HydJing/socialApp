@@ -105,3 +105,9 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 
  # Summary Section 13
 - Update User last active date time(using NGX-timeago module, using action filter to update last active date time of user when ever user controller been used)
+
+ # Summary Section 14
+- Paging in the API/SPA
+- filtering in the API/SPA
+- sorting in the API/SPA
+- new class params with age, gender and orderby. default value in API, passing thought router and added in Angular to show the filters.

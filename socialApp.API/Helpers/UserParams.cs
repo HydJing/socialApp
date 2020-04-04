@@ -18,5 +18,8 @@ namespace socialApp.API.Helpers
         public int MaxAge { get; set; } = 99;
 
         public string OrderBy { get; set; }
+
+        public bool IsGetLikees { get; set; } = false;
+        public bool IsGetLikers { get; set; } = false;
     }
 }

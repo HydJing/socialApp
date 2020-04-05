@@ -111,3 +111,8 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - filtering in the API/SPA
 - sorting in the API/SPA
 - new class params with age, gender and orderby. default value in API, passing thought router and added in Angular to show the filters.
+
+ # Summary Section 14
+- Defining Relationships in EF(one to many, many to many)
+- Using the Fluent API(chaining method, multiple include())
+- add like function in Angular(make heart icon works)

@@ -55,8 +55,6 @@ namespace socialApp.API.Data
 
             users = users.Where(u => u.Id != userParams.UserId);
 
-            users = users.Where(u => u.Gender == userParams.Gender);
-
             if (userParams.IsGetLikers)
             {
                 var userLikers = await GetUserLikes(userParams.UserId, userParams.IsGetLikers);
@@ -67,6 +65,11 @@ namespace socialApp.API.Data
             {
                 var userLikees = await GetUserLikes(userParams.UserId, userParams.IsGetLikers);
                 users = users.Where(u => userLikees.Contains(u.Id));
+            }
+
+            if (!userParams.IsGetLikers && !userParams.IsGetLikees)
+            {
+                users = users.Where(u => u.Gender == userParams.Gender);
             }
 
             if (userParams.MinAge != 18 || userParams.MaxAge != 99) 

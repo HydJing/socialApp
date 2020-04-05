@@ -35,8 +35,8 @@ namespace socialApp.API.Controllers
             var userFromRepo = await _repo.GetUser(currentUserId);
 
             userParams.UserId = currentUserId;
-
-            if (string.IsNullOrEmpty(userParams.Gender)) 
+        
+            if (string.IsNullOrEmpty(userParams.Gender) && !userParams.IsGetLikers && !userParams.IsGetLikers) 
             {
                 userParams.Gender = (userFromRepo.Gender == "male" ? "female" : "male");
             }

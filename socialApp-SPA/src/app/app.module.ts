@@ -31,6 +31,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { TimeagoModule } from 'ngx-timeago';
+import { ListsResolver } from './_resolvers/lists.resolver';
 
 
 
@@ -92,6 +93,7 @@ export class CustomHammerConfig extends HammerGestureConfig {
       MemberEditResolver,
       { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
       PreventUnsavedChanges,
+      ListsResolver,
    ],
    bootstrap: [
       AppComponent

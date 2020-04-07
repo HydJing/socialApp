@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -44,6 +45,40 @@ namespace socialApp.API.Controllers
             return Ok(messageFromRepo);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetMessageForUser(int userid, [FromQuery]MessageParams messageParams)
+        {
+            if (userid != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            messageParams.UserId = userid;
+
+            var messageFromRepo = await _repo.GetMessagesForUser(messageParams);
+
+            var mesages = _mapper.Map<IEnumerable<MessageToReturnDto>>(messageFromRepo);
+
+            Response.AddPagination(messageFromRepo.CurrentPage, messageFromRepo.PageSize, messageFromRepo.TotalCount, messageFromRepo.TotalPages);
+
+            return Ok(mesages);
+        }
+
+        [HttpGet("thread/{recipientId}")]
+        public async Task<IActionResult> GetMessageThread(int userId, int recipientId) 
+        {
+            if (userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
+                return Unauthorized();
+            }
+
+            var messageFromRepo = await _repo.GetMessageThread(userId, recipientId);
+
+            var messageThread = _mapper.Map<IEnumerable<MessageToReturnDto>>(messageFromRepo);
+
+            return Ok(messageThread);
+        }
+
         [HttpPost]
         public async Task<IActionResult> CreateMessage(int userId, MessageForCreationDto messageForCreationDto)
         {
@@ -73,5 +108,6 @@ namespace socialApp.API.Controllers
 
             throw new Exception("Creating the message failed on save");
         }
+        
     }
 }

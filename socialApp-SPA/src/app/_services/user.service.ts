@@ -101,4 +101,8 @@ getMessages(id: number, page?, itemsPerPage?, messageContainer?) {
   );
 }
 
+getMessageThread(id: number, recipietnId: number) {
+  return this.http.get<Message[]>(this.baseUrl + 'users/' + id + '/messages/thread/' + recipietnId);
+}
+
 }

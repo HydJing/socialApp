@@ -112,7 +112,15 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 - sorting in the API/SPA
 - new class params with age, gender and orderby. default value in API, passing thought router and added in Angular to show the filters.
 
- # Summary Section 14
+ # Summary Section 15
 - Defining Relationships in EF(one to many, many to many, defined the relationship in class dataContext)
 - Using the Fluent API(chaining method, multiple include())
 - add like function in Angular(make heart icon works)
+
+# Summary Section 16
+- The message entity(controller, model and DTO)
+- CRUD(create message, get message, update message and delete mesage, in message controller class)
+- Inbox, Outbox, Unread messages(to fetch different messages to show in the list)
+- Add a 'chat' design to the messaging system(chat window)
+- adding the 'Mark as Read' functionality(when load the messages, also mark the message as read if the message recipient id equals current user id)
+- Deleting messages(delete the message only for current user, the recipietn might still have the message)

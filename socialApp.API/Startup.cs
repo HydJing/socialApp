@@ -45,7 +45,7 @@ namespace socialApp.API
         {
             services.AddDbContext<DataContext>(x => {
                 x.UseLazyLoadingProxies();
-                x.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
+                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             ConfigureServices(services);
@@ -87,22 +87,27 @@ namespace socialApp.API
             }
             else
             {
-                app.UseExceptionHandler(builder => {
-                    builder.Run(async context => {
-                        context.Response.StatusCode = (int)System.Net.HttpStatusCode.InternalServerError;
+                // app.UseExceptionHandler(builder => {
+                //     builder.Run(async context => {
+                //         context.Response.StatusCode = (int)System.Net.HttpStatusCode.InternalServerError;
 
-                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                //         var error = context.Features.Get<IExceptionHandlerFeature>();
 
-                        if (error != null) {
-                            context.Response.AddApplicationError(error.Error.Message);
+                //         if (error != null) {
+                //             context.Response.AddApplicationError(error.Error.Message);
 
-                            await context.Response.WriteAsync(error.Error.Message);
-                        }
-                    });
-                });
+                //             await context.Response.WriteAsync(error.Error.Message);
+                //         }
+                //     });
+                // });
+
+                app.UseHsts();
+
             }
 
-            // app.UseHttpsRedirection();
+            app.UseDeveloperExceptionPage();
+
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 

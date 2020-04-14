@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using socialApp.API.Data;
+using socialApp.API.Helpers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -17,8 +20,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using socialApp.API.Data;
-using socialApp.API.Helpers;
+
 
 namespace socialApp.API
 {
@@ -45,7 +47,18 @@ namespace socialApp.API
         {
             services.AddDbContext<DataContext>(x => {
                 x.UseLazyLoadingProxies();
-                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                // x.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
+
+                x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), 
+                    sqlServerOptionsAction: sqlOptions => 
+                    {
+                        sqlOptions.EnableRetryOnFailure(
+                            maxRetryCount: 5,
+                            maxRetryDelay: TimeSpan.FromSeconds(30),
+                            errorNumbersToAdd: null
+                        );
+                    }
+                );
             });
 
             ConfigureServices(services);
@@ -54,11 +67,11 @@ namespace socialApp.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            // services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers().AddNewtonsoftJson(opt => {
                 opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
-            services.AddControllers().AddNewtonsoftJson();
+            // services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
 
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
@@ -101,13 +114,13 @@ namespace socialApp.API
                 //     });
                 // });
 
-                app.UseHsts();
+                // app.UseHsts();
 
             }
 
             app.UseDeveloperExceptionPage();
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
 
             app.UseRouting();
 

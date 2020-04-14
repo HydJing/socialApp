@@ -94,7 +94,7 @@ namespace socialApp.API.Controllers
             if (await _repo.SaveAll())
             {
                 var photoToReturn = _mapper.Map<PhotoForReturnDto>(photo);
-                return CreatedAtRoute("GetPhoto", new { userId = userId, id = photo.Id }, photoToReturn);
+                return CreatedAtRoute("GetPhoto", new { userId, id = photo.Id }, photoToReturn);
             }
 
             return BadRequest("Could not add the photo.");

@@ -14,7 +14,6 @@ using socialApp.API.Models;
 
 namespace socialApp.API.Controllers
 {
-    [Authorize]
     [Route("api/users/{userId}/photos")]
     [ApiController]
 

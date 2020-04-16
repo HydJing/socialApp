@@ -13,7 +13,6 @@ using socialApp.API.Models;
 namespace socialApp.API.Controllers
 {
     [ServiceFilter(typeof(LogUserActivity))]
-    [Authorize]
     [Route("api/users/{userid}/[controller]")]
     [ApiController]
     public class MessagesController: ControllerBase

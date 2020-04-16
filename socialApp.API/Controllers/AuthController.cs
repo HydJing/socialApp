@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -16,7 +17,7 @@ namespace socialApp.API.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
-
+    [AllowAnonymous]
     public class AuthController : ControllerBase
     {
         private readonly IAuthRepository _repo;

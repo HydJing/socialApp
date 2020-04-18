@@ -71,7 +71,8 @@ namespace socialApp.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            IdentityBuilder builder = services.AddIdentityCore<User>(opt => {
+            IdentityBuilder builder = services.AddIdentityCore<User>(opt =>
+            {
                 opt.Password.RequireDigit = false;
                 opt.Password.RequiredLength = 4;
                 opt.Password.RequireNonAlphanumeric = false;
@@ -82,26 +83,8 @@ namespace socialApp.API
             builder.AddEntityFrameworkStores<DataContext>();
             builder.AddRoleValidator<RoleValidator<Role>>();
             builder.AddRoleManager<RoleManager<Role>>();
-            builder.AddSignInManager<SignInManager<Role>>();
+            builder.AddSignInManager<SignInManager<User>>();
 
-            // services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllers(options => {
-                var policy = new AuthorizationPolicyBuilder()
-                                .RequireAuthenticatedUser()
-                                .Build();
-                options.Filters.Add(new AuthorizeFilter(policy));
-            })
-            .AddNewtonsoftJson(opt => {
-                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
-            // services.AddControllers().AddNewtonsoftJson();
-            services.AddCors();
-
-            services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
-
-            services.AddAutoMapper(typeof(SocialRepository).Assembly);
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddScoped<ISocialRepository, SocialRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -111,6 +94,30 @@ namespace socialApp.API
                     ValidateAudience = false,
                 };
             });
+
+
+            // services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddControllers(options => 
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            })
+            .AddNewtonsoftJson(opt => 
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+            
+            // services.AddControllers().AddNewtonsoftJson();
+            services.AddCors();
+
+            services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
+
+            services.AddAutoMapper(typeof(SocialRepository).Assembly);
+            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<ISocialRepository, SocialRepository>();
+            
             services.AddScoped<LogUserActivity>();
         }
 

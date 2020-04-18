@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using socialApp.API.Data;
 
-namespace DatingApp.API.Controllers
+namespace socialApp.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

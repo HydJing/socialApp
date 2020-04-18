@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using socialApp.API.Models;
 
 namespace socialApp.API.Models
 {

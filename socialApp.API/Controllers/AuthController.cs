@@ -69,7 +69,7 @@ namespace socialApp.API.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.Username),
+                new Claim(ClaimTypes.Name, userFromRepo.UserName),
             };
 
             // get token key from the pre-defined string in the app settings, it should be at least more than 12 random characters

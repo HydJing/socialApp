@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using socialApp.API.Models;
 
@@ -7,9 +8,9 @@ namespace socialApp.API.Data
 {
     public class Seed
     {
-        public static void SeedUsers(DataContext context)
+        public static void SeedUsers(UserManager<User> userManager)
         {
-            if (!context.Users.Any()) 
+            if (!userManager.Users.Any()) 
             {
                 // read the file to get all raw data
                 var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
@@ -20,17 +21,8 @@ namespace socialApp.API.Data
                 // loop through each user data and generate the password hash
                 foreach (var user in users)
                 {
-                    byte[] passwordHash, passwordSalt;
-                    CreatePasswordHash("password", out passwordHash, out passwordSalt);
-
-                    // user.PasswordHash = passwordHash;
-                    // user.PasswordSalt = passwordSalt;
-                    user.UserName = user.UserName.ToLower();
-                    context.Users.Add(user);
+                    userManager.CreateAsync(user, "password").Wait();
                 }
-
-                // save all the users data to DB
-                context.SaveChanges();
             }
         }
 

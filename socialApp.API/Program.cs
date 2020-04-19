@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Identity;
+using socialApp.API.Models;
 
 namespace socialApp.API
 {
@@ -21,9 +23,11 @@ namespace socialApp.API
                 {
                     var context = services.GetRequiredService<DataContext>();
 
+                    var userManager = services.GetRequiredService<UserManager<User>>();
+
                     context.Database.Migrate();
                     
-                    Seed.SeedUsers(context);
+                    Seed.SeedUsers(userManager);
                 }
                 catch (Exception ex)
                 {

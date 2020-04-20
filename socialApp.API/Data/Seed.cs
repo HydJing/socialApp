@@ -8,7 +8,7 @@ namespace socialApp.API.Data
 {
     public class Seed
     {
-        public static void SeedUsers(UserManager<User> userManager)
+        public static void SeedUsers(UserManager<User> userManager, RoleManager<Role> roleManager)
         {
             if (!userManager.Users.Any()) 
             {
@@ -18,11 +18,39 @@ namespace socialApp.API.Data
                 // all the raw data loading to objects
                 var users = JsonConvert.DeserializeObject<List<User>>(userData);
 
+                // create roles
+                var roles = new List<Role>
+                {
+                    new Role{Name = "Member"},
+                    new Role{Name = "Admin"},
+                    new Role{Name = "Moderator"},
+                    new Role{Name = "VIP"},
+                };
+
+                foreach (var role in roles)
+                {
+                    roleManager.CreateAsync(role).Wait();
+                }
+
                 // loop through each user data and generate the password hash
                 foreach (var user in users)
                 {
                     userManager.CreateAsync(user, "password").Wait();
+                    userManager.AddToRoleAsync(user, "Member");
                 }
+
+                var adminUser = new User
+                {
+                    UserName = "Admin"
+                };
+
+                var result = userManager.CreateAsync(adminUser, "passowrd").Result;
+
+                if (result.Succeeded) 
+                {
+                    var admin =userManager.FindByNameAsync("Admin").Result;
+                    userManager.AddToRolesAsync(admin, new[] {"Admin", "Moderator"});
+                };
             }
         }
 

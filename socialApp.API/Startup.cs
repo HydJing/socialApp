@@ -115,7 +115,6 @@ namespace socialApp.API
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
 
             services.AddAutoMapper(typeof(SocialRepository).Assembly);
-            services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<ISocialRepository, SocialRepository>();
             
             services.AddScoped<LogUserActivity>();

@@ -20,7 +20,7 @@ namespace socialApp.API.Controllers
 
         }
         
-        [AllowAnonymous]
+        [Authorize(Roles = "Admin, Moderator")]
         [HttpGet]
         public async Task<IActionResult> GetValues()
         {
@@ -29,7 +29,7 @@ namespace socialApp.API.Controllers
             return Ok(values);
         }
 
-        [AllowAnonymous]
+        [Authorize(Roles = "Member")]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id)
         {

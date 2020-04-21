@@ -44,7 +44,7 @@ namespace socialApp.API.Data
                     UserName = "Admin"
                 };
 
-                var result = userManager.CreateAsync(adminUser, "passowrd").Result;
+                var result = userManager.CreateAsync(adminUser, "password").Result;
 
                 if (result.Succeeded) 
                 {

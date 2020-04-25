@@ -23,7 +23,7 @@ namespace socialApp.API.Controllers
         }
 
         [Authorize(Policy = "RequireAdminRole")]
-        [HttpGet("userWithRoles")]
+        [HttpGet("usersWithRoles")]
         public async Task<IActionResult> GetUsersWithRoles()
         {
             var userList = await _context.Users

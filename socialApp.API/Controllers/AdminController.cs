@@ -31,7 +31,7 @@ namespace socialApp.API.Controllers
                 .Select(userList => new
                 {
                     Id = userList.Id,
-                    UsernName = userList.UserName,
+                    UserName = userList.UserName,
                     Roles = (from userRole in userList.UserRoles
                              join role in _context.Roles
                              on userRole.RoleId

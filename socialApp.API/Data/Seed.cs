@@ -35,6 +35,7 @@ namespace socialApp.API.Data
                 // loop through each user data and generate the password hash
                 foreach (var user in users)
                 {
+                    user.Photos.SingleOrDefault().IsApproved = true;
                     userManager.CreateAsync(user, "password").Wait();
                     userManager.AddToRoleAsync(user, "Member");
                 }

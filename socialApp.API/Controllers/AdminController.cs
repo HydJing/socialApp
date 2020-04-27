@@ -16,10 +16,16 @@ namespace socialApp.API.Controllers
     {
         private readonly DataContext _context;
         private readonly UserManager<User> _userManager;
-        public AdminController(DataContext context, UserManager<User> userManager)
+        private Cloudinary _cloudinary;
+
+        public AdminController(
+            DataContext context, 
+            UserManager<User> userManager, 
+            IOptions<CloudinarySettings> cloudinarySettings)
         {
             _userManager = userManager;
             _context = context;
+            _cloudinary = cloudinarySettings;
         }
 
         [Authorize(Policy = "RequireAdminRole")]
@@ -73,9 +79,20 @@ namespace socialApp.API.Controllers
 
         [Authorize(Policy = "ModeratePhotoRole")]
         [HttpGet("photoForModeration")]
-        public IActionResult GetPhotosForModeration()
+        public async IActionResult GetPhotosForModeration()
         {
-            return Ok("Admins or moderators can see this");
+            var photos = await _context.Photos
+                .Include(u => u.User)
+                .IgnoreQueryFilters()
+                .Where(p => p.IsApproved == false)
+                .Select(u => new {
+                    Id = u.Id,
+                    UserName = u.User.UserName,
+                    Url = u.Url,
+                    IsApproved = u.IsApproved
+                }).ToListAsync();
+            
+            return OK(photos);
         }
     }
 }

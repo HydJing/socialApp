@@ -91,7 +91,7 @@ namespace socialApp.API.Controllers
 
 
         [Authorize(Policy = "ModeratePhotoRole")]
-        [HttpGet("photoForModeration")]
+        [HttpGet("photosForModeration")]
         public async Task<IActionResult> GetPhotosForModeration()
         {
             var photos = await _context.Photos

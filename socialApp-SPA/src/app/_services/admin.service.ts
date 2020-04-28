@@ -21,7 +21,7 @@ export class AdminService {
   }
 
   getPhotosForApproval() {
-    return this.http.get(this.baseUrl + 'admin/photosForModeration/');
+    return this.http.get(this.baseUrl + 'admin/photosForModeration');
   }
 
   approvePhoto(photoId) {

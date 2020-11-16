@@ -118,6 +118,7 @@ namespace socialApp.API
             // services.AddControllers().AddNewtonsoftJson();
             services.AddCors();
 
+            // update secret manager to manage the credentials
             services.Configure<CloudinarySettings>(Configuration.GetSection("Cloudinary"));
 
             services.AddAutoMapper(typeof(SocialRepository).Assembly);

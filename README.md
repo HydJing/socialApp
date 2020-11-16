@@ -19,7 +19,32 @@ Hi! This is my first .net app **socialApp**, following tutorial [Build an app wi
 
 # Demo Screenshots
 - Homepage
-![GitHub Logo](https://user-images.githubusercontent.com/9813209/99203004-fe408e80-2815-11eb-88b0-3a168a20f3fc.png)
+![homepage_image](https://user-images.githubusercontent.com/9813209/99203004-fe408e80-2815-11eb-88b0-3a168a20f3fc.png)
+
+- Signup Page
+![signup_image](https://user-images.githubusercontent.com/9813209/99203009-ff71bb80-2815-11eb-8f46-ed8b22cbb1db.png)
+
+- Matches Page
+![matches_image](https://user-images.githubusercontent.com/9813209/99203010-ff71bb80-2815-11eb-891b-781380a1a952.png)
+
+- List Page
+![list_page](https://user-images.githubusercontent.com/9813209/99203006-fed92500-2815-11eb-9ede-77c6db6005ec.png)
+
+- Messages Page
+![messages page](https://user-images.githubusercontent.com/9813209/99202994-fa147100-2815-11eb-91a5-55869dbd1832.png)
+
+- Detail Information Page
+![detail Logo](https://user-images.githubusercontent.com/9813209/99202995-fa147100-2815-11eb-843b-88c79c0b83cc.png)
+![photo Logo](https://user-images.githubusercontent.com/9813209/99203003-fda7f800-2815-11eb-9a75-1ee81e3b8681.png)
+![message Logo](https://user-images.githubusercontent.com/9813209/99202999-fc76cb00-2815-11eb-8657-9f6cc154a853.png)
+
+- Acount Detail Page
+![acount Logo](https://user-images.githubusercontent.com/9813209/99202987-f84aad80-2815-11eb-8459-8603ef0270ba.png)
+![accountimage Logo](https://user-images.githubusercontent.com/9813209/99202986-f7198080-2815-11eb-8bd6-127942a6d1bc.png)
+
+- Admin Pages
+![Admin - Users](https://user-images.githubusercontent.com/9813209/99203939-eddde300-2818-11eb-91ad-4808f8fb03cc.png)
+![adminphoto Logo](https://user-images.githubusercontent.com/9813209/99202990-f8e34400-2815-11eb-9f33-9710f0f47545.png)
 
 
 
